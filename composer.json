@@ -1,0 +1,19 @@
+{
+    "name": "lefoyer/rememberme",
+    "description": "The rememberme plugin add persistent login functionality.",
+    "license": "GPL-3.0+",
+    "version": "0.1.0",
+    "type": "roundcube-plugin",
+    "homepage": "https://github.com/lefoyer/rememberme",
+    "authors": [
+        {
+            "name": "Sidlyarenko Sergey",
+            "email": "roundcube@lefoyer.ru",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+          "email": "roundcube@lefoyer.ru",
+          "issues": "https://github.com/lefoyer/rememberme/issues"
+      }
+}

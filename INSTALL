@@ -1,0 +1,29 @@
+Look at https://github.com/lefoyer/rememberme
+
+Installing rememberme plugin
+---------------------------------------
+
+You need roundcube > 0.9 installed.
+
+1. Download the latest version it to the roundcube plugins dir :
+
+    mkdir <path_to_roundcube>/plugins/rememberme
+
+    cd <path_to_roundcube>/plugins/rememberme
+
+    git clone https://github.com/lefoyer/rememberme.git .
+
+2. Add "rememberme" to the plugins list in <path_to_roundcube>/config/main.inc.php, for example :
+
+    $rcmail_config['plugins'] = array('rememberme',);
+
+It works :)
+
+
+Configuration
+-------------
+
+You can customize some settings :
+
+    copy config.inc.php.dist to config.inc.php
+    edit config.inc.php as you fancy

@@ -1,0 +1,25 @@
+#rememberme_container {
+        border: 0px solid #999;
+        text-align:center;
+}
+
+#rememberme_container div {
+        margin: 3px 0 0 0;
+        padding: 0;
+        line-height: 1.0em;
+}
+
+#rememberme_container label {
+        width: 20%;
+        white-space: nowrap;
+        color: #cecece;
+        text-shadow: 0px 1px 1px black;
+        text-align: right;
+        padding-right: 1em;
+        display: inline-block;
+}
+
+#rememberme_container input {
+        display: inline-block;
+        min-width: 20px;
+}

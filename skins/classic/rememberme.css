@@ -1,0 +1,24 @@
+#rememberme_container {
+        text-align:center;
+}
+
+#rememberme_container div {
+        margin: 3px 0 0 0;
+        padding: 0;
+        line-height: 1.0em;
+}
+
+#rememberme_container label {
+        width: 20%;
+        white-space: nowrap;
+        font-size: 85%;
+        color: #333;
+        text-align: right;
+        padding-right: 1em;
+        display: inline-block;
+}
+
+#rememberme_container input {
+        display: inline-block;
+        min-width: 20px;
+}
