@@ -4,4 +4,7 @@
 // if session saved in memcache this paramemter limited of 43200 (30 days)
 $rcmail_config['rememberme_session_lifetime'] = 43200;
 
+// for debug
+$rcmail_config['rememberme_log'] = false;
+
 ?>
