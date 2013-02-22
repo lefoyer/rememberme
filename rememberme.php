@@ -65,6 +65,7 @@ class rememberme extends rcube_plugin
     function update_lifetime($args = null)
     {
         $this->rc->session->set_lifetime($this->session_lifetime * 60);
+        ini_set('session.gc_maxlifetime', $this->session_lifetime * 60 * 2);
 
         return $args;
     }
