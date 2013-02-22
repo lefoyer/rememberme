@@ -1,6 +1,13 @@
 CHANGELOG rememberme
 ===========================
 
+RELEASE 0.2
+-----------
+
+- add parameter for debug
+- add parameter for use cookie time instead of expire session
+- small optimization
+
 RELEASE 0.1
 -----------
 
