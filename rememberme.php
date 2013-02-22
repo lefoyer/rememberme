@@ -103,6 +103,7 @@ class rememberme extends rcube_plugin
         $this->load_session_lifetime();
 
         $this->rc->user->save_prefs(array('rememberme' => $this->rememberme_value));
+        $this->rc->user->save_prefs(array('session_lifetime' => $this->session_lifetime));
 
         rcube_utils::setcookie('rememberme', '1', 0);
 
