@@ -83,6 +83,14 @@ class rememberme extends rcube_plugin
         $this->rc->session->set_lifetime($this->session_lifetime * 60);
         ini_set('session.gc_maxlifetime', $this->session_lifetime * 60 * 2);
 
+        if ($this->rc->config->get('rememberme_usetime', true)) {
+            $roundcube_session_name = $this->rc->config->get('session_name', 'roundcube_sessid');
+            $roundcube_sessauth_name = 'roundcube_sessauth';
+            rcube_utils::setcookie('rememberme', '1', $this->session_lifetime * 60 + time());
+            rcube_utils::setcookie($roundcube_session_name, $_COOKIE[$roundcube_session_name], $this->session_lifetime * 60 + time());
+            rcube_utils::setcookie($roundcube_sessauth_name, $_COOKIE[$roundcube_sessauth_name], $this->session_lifetime * 60 + time());
+        }
+
         if ($this->debug) write_log('rememberme', sprintf("task:%s, action:%s, lifetime:%d", $this->rc->task, $this->rc->action, $this->session_lifetime));
 
         return $args;
@@ -92,9 +100,19 @@ class rememberme extends rcube_plugin
     function save_prefs($args)
     {
         $this->load_env();
+        $this->load_session_lifetime();
 
         $this->rc->user->save_prefs(array('rememberme' => $this->rememberme_value));
-        rcube_utils::setcookie('rememberme', '1', 0);
+
+        if ($this->rc->config->get('rememberme_usetime', true)) {
+            $roundcube_session_name = $this->rc->config->get('session_name', 'roundcube_sessid');
+            $roundcube_sessauth_name = 'roundcube_sessauth';
+            rcube_utils::setcookie('rememberme', '1', $this->session_lifetime * 60 + time());
+            rcube_utils::setcookie($roundcube_session_name, $_COOKIE[$roundcube_session_name], $this->session_lifetime * 60 + time());
+            rcube_utils::setcookie($roundcube_sessauth_name, $_COOKIE[$roundcube_sessauth_name], $this->session_lifetime * 60 + time());
+        } else {
+            rcube_utils::setcookie('rememberme', '1', 0);
+        }
 
         if ($this->debug) write_log('rememberme', 'prefs saved');
 
