@@ -27,7 +27,7 @@ class rememberme extends rcube_plugin
         if ($this->rc->task == 'login' && $this->rc->action == 'login') {
             $this->add_hook('authenticate', array($this, 'auth'));
             $this->add_hook('login_after', array($this, 'save_prefs'));
-        } else if ($this->rc->task != 'logout' && (isset($_COOKIE['rememberme']) || $this->rc->config->get('rememberme', false))) {
+        } else if ($this->rc->task != 'logout' && $_SESSION['session_lifetime']) {
             $this->add_hook('startup', array($this, 'update_lifetime'));
         }
     }
@@ -65,8 +65,7 @@ class rememberme extends rcube_plugin
     {
         $this->load_env();
 
-        $this->rc->user->save_prefs(array('rememberme' => false));
-        rcube_utils::setcookie('rememberme', '-del-', time() - 60);
+        unset($_SESSION['session_lifetime']);
 
         if ($this->debug) write_log('rememberme', 'kill_session');
 
@@ -77,7 +76,11 @@ class rememberme extends rcube_plugin
     function update_lifetime($args = null)
     {
         $this->load_env();
-        $this->load_session_lifetime();
+
+        if (!empty($_SESSION) && $_SESSION['session_lifetime'])
+            $this->session_lifetime = $_SESSION['session_lifetime'];
+        else
+            $this->load_session_lifetime();
 
         $this->rc->session->set_lifetime($this->session_lifetime * 60);
         ini_set('session.gc_maxlifetime', $this->session_lifetime * 60 * 2);
@@ -85,7 +88,6 @@ class rememberme extends rcube_plugin
         if ($this->rc->config->get('rememberme_usetime', true) && $this->rc->task != 'login') {
             $roundcube_session_name = $this->rc->config->get('session_name', 'roundcube_sessid');
             $roundcube_sessauth_name = 'roundcube_sessauth';
-            rcube_utils::setcookie('rememberme', '1', $this->session_lifetime * 60 + time());
             rcube_utils::setcookie($roundcube_session_name, $_COOKIE[$roundcube_session_name], $this->session_lifetime * 60 + time());
             rcube_utils::setcookie($roundcube_sessauth_name, $_COOKIE[$roundcube_sessauth_name], $this->session_lifetime * 60 + time());
         }
@@ -102,10 +104,7 @@ class rememberme extends rcube_plugin
             $this->load_env();
             $this->load_session_lifetime();
 
-            $this->rc->user->save_prefs(array('rememberme' => $this->rememberme_value));
-            $this->rc->user->save_prefs(array('session_lifetime' => $this->session_lifetime));
-
-            rcube_utils::setcookie('rememberme', '1', 0);
+            $_SESSION['session_lifetime'] = $this->session_lifetime;
 
             if ($this->debug) write_log('rememberme', 'prefs saved');
         }
