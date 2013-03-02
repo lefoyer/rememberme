@@ -30,7 +30,6 @@ class rememberme extends rcube_plugin
         } else if ($this->rc->task != 'logout' && (isset($_COOKIE['rememberme']) || $this->rc->config->get('rememberme', false))) {
             $this->add_hook('startup', array($this, 'update_lifetime'));
         }
-
     }
 
     function load_env()
@@ -99,16 +98,17 @@ class rememberme extends rcube_plugin
     // after login save rememberme value to user preferences
     function save_prefs($args)
     {
-        $this->load_env();
-        $this->load_session_lifetime();
+        if ($this->rememberme_value) {
+            $this->load_env();
+            $this->load_session_lifetime();
 
-        $this->rc->user->save_prefs(array('rememberme' => $this->rememberme_value));
-        $this->rc->user->save_prefs(array('session_lifetime' => $this->session_lifetime));
+            $this->rc->user->save_prefs(array('rememberme' => $this->rememberme_value));
+            $this->rc->user->save_prefs(array('session_lifetime' => $this->session_lifetime));
 
-        rcube_utils::setcookie('rememberme', '1', 0);
+            rcube_utils::setcookie('rememberme', '1', 0);
 
-        if ($this->debug) write_log('rememberme', 'prefs saved');
-
+            if ($this->debug) write_log('rememberme', 'prefs saved');
+        }
         return $args;
     }
 
