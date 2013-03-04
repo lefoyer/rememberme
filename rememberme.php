@@ -55,7 +55,7 @@ class rememberme extends rcube_plugin
         $this->include_stylesheet($this->local_skin_path().'/rememberme.css');
         $this->include_script('rememberme.js');
 
-        if ($this->debug) write_log('rememberme', 'login_form');
+        if ($this->debug) write_log('rememberme', sprintf("%s login_form", session_id()));
 
         return $content;
     }
@@ -67,7 +67,7 @@ class rememberme extends rcube_plugin
 
         unset($_SESSION['session_lifetime']);
 
-        if ($this->debug) write_log('rememberme', 'kill_session');
+        if ($this->debug) write_log('rememberme', sprintf("%s kill_session", session_id()));
 
         return $args;
     }
@@ -92,7 +92,7 @@ class rememberme extends rcube_plugin
             rcube_utils::setcookie($roundcube_sessauth_name, $_COOKIE[$roundcube_sessauth_name], $this->session_lifetime * 60 + time());
         }
 
-        if ($this->debug) write_log('rememberme', sprintf("task:%s, action:%s, lifetime:%d", $this->rc->task, $this->rc->action, $this->session_lifetime));
+        if ($this->debug) write_log('rememberme', sprintf("%s task:%s, action:%s, lifetime:%d", session_id(), $this->rc->task, $this->rc->action, $this->session_lifetime));
 
         return $args;
     }
@@ -106,7 +106,7 @@ class rememberme extends rcube_plugin
 
             $_SESSION['session_lifetime'] = $this->session_lifetime;
 
-            if ($this->debug) write_log('rememberme', 'prefs saved');
+            if ($this->debug) write_log('rememberme', sprintf("%s prefs saved", session_id()));
         }
         return $args;
     }
@@ -119,7 +119,7 @@ class rememberme extends rcube_plugin
         if ($this->rememberme_value = (bool) rcube_utils::get_input_value('_rememberme', rcube_utils::INPUT_POST, false))
             $this->update_lifetime();
 
-        if ($this->debug) write_log('rememberme', 'auth');
+        if ($this->debug) write_log('rememberme', sprintf("%s auth", session_id()));
 
         return $args;
     }
