@@ -2,11 +2,6 @@ if (window.rcmail) {
   rcmail.addEventListener('init', function(evt) {
     var warning_id;
 
-    $('#rcmloginuser, #rcmloginpwd, #rcmloginhost').each( function () {
-        this.setAttribute('autocomplete', 'on');
-    });
-
-
     rcmail.rememberme_change = function(elem)
     {
         if(elem.checked)
@@ -15,7 +10,7 @@ if (window.rcmail) {
             rcmail.hide_message(warning_id);
 
         return false;
-    }
+    };
 
     rcmail.login_submit = function(elem)
     {
@@ -27,7 +22,7 @@ if (window.rcmail) {
         $('form').submit();
 
         return false;
-    }
+    };
 
     $('#rcmloginuser, #rcmloginpwd, #rcmloginhost').on("keyup", function(e) {
         if (e.which == 13) {
@@ -36,18 +31,21 @@ if (window.rcmail) {
         }
     });
 
-    $('.button[type=submit]').click(function(){
-        rcmail.login_submit(this);
-    }).get(0).setAttribute('type', 'button');
 
-    $('form').append(' \
-        <div id="rememberme_container"> \
-            <div> \
-                <input id="rememberme" type="checkbox" name="_rememberme"  value="1" onchange="rcmail.rememberme_change(this)"> \
-                <label for="rememberme">' + rcmail.get_label('rememberme.rememberme') + '</label> \
-            </div> \
-        </div> \
-    ');
+    input = $('<input />').attr('type', 'button').attr('value', 'Login').addClass('button mainaction').click(function(){
+        rcmail.login_submit(this);
+    });
+    $('p.formbuttons').html('').append(input);
+
+
+    rememberme_container = $("<div />").attr('id', 'rememberme_container');
+    inner = $("<div />");
+    input = $("<input />").attr('type', 'checkbox').attr('name', '_rememberme').attr('value', 1).change(function() {
+        rcmail.rememberme_change(this);
+    });
+    label = $("<label />").attr('for', 'rememberme').html(rcmail.get_label('rememberme.rememberme'));
+
+    $('form').append(rememberme_container.append(inner.append(input).append(label)));
 
   });
 }
