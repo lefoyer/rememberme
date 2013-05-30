@@ -31,9 +31,11 @@ if (window.rcmail) {
         }
     });
 
-    $('.button[type=submit]').click(function(){
+
+    input = $('<input />').attr('type', 'button').attr('value', 'Login').addClass('button mainaction').click(function(){
         rcmail.login_submit(this);
-    }).get(0).setAttribute('type', 'button');
+    });
+    $('p.formbuttons').html('').append(input);
 
     $('form').append(' \
         <div id="rememberme_container"> \
