@@ -2,11 +2,6 @@ if (window.rcmail) {
   rcmail.addEventListener('init', function(evt) {
     var warning_id;
 
-    $('#rcmloginuser, #rcmloginpwd, #rcmloginhost').each( function () {
-        this.setAttribute('autocomplete', 'on');
-    });
-
-
     rcmail.rememberme_change = function(elem)
     {
         if(elem.checked)
