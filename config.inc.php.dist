@@ -1,8 +1,8 @@
 <?php
 
 // time in minutes remembered session expired (similarly as session_lifetime in main config)
-// if session saved in memcache this paramemter limited of 43200 (30 days)
-$rcmail_config['rememberme_session_lifetime'] = 43200;
+// if session saved in memcache this paramemter limited of 43199 (30 days)
+$rcmail_config['rememberme_session_lifetime'] = 43199;
 
 // for debug
 $rcmail_config['rememberme_log'] = false;
