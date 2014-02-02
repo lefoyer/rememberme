@@ -55,6 +55,11 @@ class rememberme extends rcube_plugin
         $this->include_stylesheet($this->local_skin_path().'/rememberme.css');
         $this->include_script('rememberme.js');
 
+        if ($this->rc->config->get('rememberme_autocheck', false)) {
+          $rcmail = rcmail::get_instance();
+          $rcmail->output->add_script("$('#rememberme').prop('checked', true);", 'docready');
+        }
+
         if ($this->debug) write_log('rememberme', sprintf("%s login_form", session_id()));
 
         return $content;

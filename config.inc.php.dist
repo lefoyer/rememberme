@@ -10,4 +10,7 @@ $rcmail_config['rememberme_log'] = false;
 // set cookies to  now + lifetime instead of session
 $rcmail_config['rememberme_usetime'] = true;
 
+// set the rememberme checkbox as marked by default
+$rcmail_config['rememberme_autocheck'] = false;
+
 ?>
