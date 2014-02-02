@@ -41,8 +41,8 @@ class rememberme extends rcube_plugin
     function load_session_lifetime()
     {
         $this->session_lifetime = $this->rc->config->get('session_storage', 'db') == 'memcache' ?
-                                    min(43200, $this->rc->config->get('rememberme_session_lifetime', 43200)) :
-                                    $this->rc->config->get('rememberme_session_lifetime', 43200);
+                                    min(43199, $this->rc->config->get('rememberme_session_lifetime', 43199)) :
+                                    $this->rc->config->get('rememberme_session_lifetime', 43199);
     }
 
     // add rememberme to login form
@@ -53,12 +53,8 @@ class rememberme extends rcube_plugin
         $this->add_texts('localization/', true);
 
         $this->include_stylesheet($this->local_skin_path().'/rememberme.css');
+        $this->api->output->set_env('rememberme_autocheck', $this->rc->config->get('rememberme_autocheck', false));
         $this->include_script('rememberme.js');
-
-        if ($this->rc->config->get('rememberme_autocheck', false)) {
-          $rcmail = rcmail::get_instance();
-          $rcmail->output->add_script("$('#rememberme').prop('checked', true);", 'docready');
-        }
 
         if ($this->debug) write_log('rememberme', sprintf("%s login_form", session_id()));
 

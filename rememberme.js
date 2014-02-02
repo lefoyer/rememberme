@@ -6,6 +6,8 @@ if (window.rcmail) {
         this.setAttribute('autocomplete', 'on');
     });
 
+    if (rcmail.env.rememberme_autocheck) $('#rememberme').prop('checked', true);
+
     rcmail.rememberme_change = function(elem)
     {
         if(elem.checked)
@@ -46,7 +48,7 @@ if (window.rcmail) {
     $('form').append(' \
         <div id="rememberme_container"> \
             <div> \
-                <input id="rememberme" type="checkbox" name="_rememberme"  value="1" onchange="rcmail.rememberme_change(this)"> \
+                <input id="rememberme" type="checkbox" name="_rememberme"  value="1"' + (rcmail.env.rememberme_autocheck ? ' checked="checked"' : ' ') + ' onchange="rcmail.rememberme_change(this)"> \
                 <label for="rememberme">' + rcmail.get_label('rememberme.rememberme') + '</label> \
             </div> \
         </div> \

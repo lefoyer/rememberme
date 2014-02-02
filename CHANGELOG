@@ -1,6 +1,12 @@
 CHANGELOG rememberme
 ===========================
 
+RELEASE 0.4
+-----------
+
+- add autocheck
+- fix session max lifetime for last roundcube
+
 RELEASE 0.3
 -----------
 

@@ -3,7 +3,7 @@ Look at https://github.com/lefoyer/rememberme
 Installing rememberme plugin
 ---------------------------------------
 
-You need roundcube > 0.9 installed.
+You need roundcube >= v0.9 installed.
 
 1. Download the latest version it to the roundcube plugins dir :
 

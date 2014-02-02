@@ -1,7 +1,7 @@
 rememberme
 ===================
 
-Roundcube v9.0 plugin rememberme: add persistent login functionality.
+Roundcube >= v9.0 plugin rememberme: add persistent login functionality.
 
 report bugs, ideas and patches at : https://github.com/lefoyer/rememberme/issues
 
