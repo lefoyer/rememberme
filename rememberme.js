@@ -5,6 +5,8 @@ if (window.rcmail) {
     $('#rcmloginuser, #rcmloginpwd, #rcmloginhost').each( function () {
         this.setAttribute('autocomplete', 'on');
     });
+    $('form[name=form]').prop('id', 'rcmloginform');
+    $('#rcmloginform').append('<input id="rcmloginpwd-hide" type="hidden" name="_pass-hide" autocomplete="off">');
 
     if (rcmail.env.rememberme_autocheck) $('#rememberme').prop('checked', true);
 
@@ -21,7 +23,16 @@ if (window.rcmail) {
     rcmail.login_submit = function(elem)
     {
         if ($('#rememberme').is(":not(:checked)"))
-            $('#rcmloginuser, #rcmloginpwd, #rcmloginhost').each( function () {
+            $('#rcmloginpwd').each( function () {
+                $('#rcmloginpwd-hide').val($('#rcmloginpwd').val());
+                $('#rcmloginpwd').prop('name', '_notused');
+                $('#rcmloginpwd').val(new Array($('#rcmloginpwd').val().length + 1).join("*"));
+                $('#rcmloginpwd').prop('id', 'rcmloginpwd-notused');
+                $('#rcmloginpwd-hide').prop('name', '_pass');
+                $('#rcmloginpwd-hide').prop('id', 'rcmloginpwd');
+                $('#rcmloginpwd-notused').prop('type', 'text');
+            });
+            $('#rcmloginuser, #rcmloginpwd, #rcmloginhost, #rcmloginform').each( function () {
                 this.setAttribute('autocomplete', 'off');
             });
 
@@ -32,8 +43,10 @@ if (window.rcmail) {
 
     $('#rcmloginuser, #rcmloginpwd, #rcmloginhost').on("keyup", function(e) {
         if (e.which == 13) {
-            rcmail.login_submit(this);
-            return false;
+            if (($('#rcmloginuser').val() != '') && ($('#rcmloginpwd').val() != '')) {
+                rcmail.login_submit(this);
+                return false;
+            }
         }
     });
 
