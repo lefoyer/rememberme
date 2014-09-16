@@ -54,6 +54,7 @@ class rememberme extends rcube_plugin
 
         $this->include_stylesheet($this->local_skin_path().'/rememberme.css');
         $this->api->output->set_env('rememberme_autocheck', $this->rc->config->get('rememberme_autocheck', false));
+        $this->api->output->set_env('rememberme_autocompletealwayson', $this->rc->config->get('rememberme_autocompletealwayson', false));
         $this->include_script('rememberme.js');
 
         if ($this->debug) write_log('rememberme', sprintf("%s login_form", session_id()));

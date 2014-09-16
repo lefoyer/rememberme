@@ -24,18 +24,20 @@ if (window.rcmail) {
     rcmail.login_submit = function(elem)
     {
         if ($('#rememberme').is(":not(:checked)")) {
-            $('#rcmloginpwd').each( function () {
-                $('#rcmloginpwd-hide').val($('#rcmloginpwd').val());
-                $('#rcmloginpwd').prop('name', '_notused');
-                $('#rcmloginpwd').val(new Array($('#rcmloginpwd').val().length + 1).join("*"));
-                $('#rcmloginpwd').prop('id', 'rcmloginpwd-notused');
-                $('#rcmloginpwd-hide').prop('name', '_pass');
-                $('#rcmloginpwd-hide').prop('id', 'rcmloginpwd');
-                $('#rcmloginpwd-notused').prop('type', 'text');
-            });
-            $('#rcmloginuser, #rcmloginpwd, #rcmloginhost, #rcmloginform').each( function () {
-                this.setAttribute('autocomplete', 'off');
-            });
+            if (!rcmail.env.rememberme_autocompletealwayson) {
+                $('#rcmloginpwd').each( function () {
+                    $('#rcmloginpwd-hide').val($('#rcmloginpwd').val());
+                    $('#rcmloginpwd').prop('name', '_notused');
+                    $('#rcmloginpwd').val(new Array($('#rcmloginpwd').val().length + 1).join("*"));
+                    $('#rcmloginpwd').prop('id', 'rcmloginpwd-notused');
+                    $('#rcmloginpwd-hide').prop('name', '_pass');
+                    $('#rcmloginpwd-hide').prop('id', 'rcmloginpwd');
+                    $('#rcmloginpwd-notused').prop('type', 'text');
+                });
+                $('#rcmloginuser, #rcmloginpwd, #rcmloginhost, #rcmloginform').each( function () {
+                    this.setAttribute('autocomplete', 'off');
+                });
+            }
         }
 
         $('form').submit();
