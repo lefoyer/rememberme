@@ -1,5 +1,5 @@
 #rememberme_container {
-        border: 0px solid #999;
+        border: 0px;
         text-align:center;
 }
 
@@ -10,16 +10,14 @@
 }
 
 #rememberme_container label {
-        width: 20%;
         white-space: nowrap;
         color: #cecece;
         text-shadow: 0px 1px 1px black;
-        text-align: right;
-        padding-right: 1em;
-        display: inline-block;
+        padding-right: 4px;
 }
 
 #rememberme_container input {
-        display: inline-block;
-        min-width: 20px;
+        vertical-align: middle;
+        position: relative;
+        bottom: 1px;
 }
