@@ -8,9 +8,11 @@ report bugs, ideas and patches at : https://github.com/lefoyer/rememberme/issues
 
 CONTACT
 -------
-Author:   Sergey Sidlyarenko (roundcube@lefoyer.ru)
+Author:   Sergey Sidlyarenko (roundcube@ilooi.com)
 
 Bug reports through github (https://github.com/lefoyer/rememberme/issues)
+
+P.S.: I am find work. If you need support servers please write me.
 
 LICENSE
 -------
